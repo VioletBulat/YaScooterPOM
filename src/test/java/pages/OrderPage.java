@@ -18,17 +18,17 @@ public class OrderPage {
     }
 
     // Локаторы
-    private final By nameInput = By.xpath("//input[@placeholder='* Имя']");
-    private final By surnameInput = By.xpath("//input[@placeholder='* Фамилия']");
-    private final By addressInput = By.xpath("//input[@placeholder='* Адрес: куда привезти заказ']");
-    private final By metroStationInput = By.xpath("//input[@placeholder='* Станция метро']");
-    private final By phoneInput = By.xpath("//input[@placeholder='* Телефон: на него позвонит курьер']");
-    private final By dateInput = By.xpath("//input[@placeholder='* Когда привезти самокат']");
-    private final By rentalPeriodDropdown = By.xpath("//div[@class='Dropdown-placeholder' and contains(text(), '* Срок аренды')]");
-    private final By commentInput = By.xpath("//input[@placeholder='Комментарий для курьера']");
-    private final By makeOrderButton = By.xpath("//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']");
-    private final By yesButton = By.xpath("//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Да']");
-    private final By orderSuccessMessage = By.xpath("//*[contains(text(), 'Заказ оформлен')]");
+    private final By nameInput = By.xpath(Config.getLocator("nameInput"));
+    private final By surnameInput = By.xpath(Config.getLocator("surnameInput"));
+    private final By addressInput = By.xpath(Config.getLocator("addressInput"));
+    private final By metroStationInput = By.xpath(Config.getLocator("metroStationInput"));
+    private final By phoneInput = By.xpath(Config.getLocator("phoneInput"));
+    private final By dateInput = By.xpath(Config.getLocator("dateInput"));
+    private final By rentalPeriodDropdown = By.xpath(Config.getLocator("rentalPeriodDropdown"));
+    private final By commentInput = By.xpath(Config.getLocator("commentInput"));
+    private final By makeOrderButton = By.xpath(Config.getLocator("makeOrderButton"));
+    private final By yesButton = By.xpath(Config.getLocator("yesButton"));
+    private final By orderSuccessMessage = By.xpath(Config.getLocator("orderSuccessMessage"));
 
     // Метод для заполнения поля имени
     public void fillName(String name) {

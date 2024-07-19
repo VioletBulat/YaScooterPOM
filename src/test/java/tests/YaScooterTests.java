@@ -81,6 +81,6 @@ public class YaScooterTests {
     // Метод для завершения работы с браузером после тестов
     @After
     public void teardown() {
-            driver.quit();
+        driver.quit();
     }
 }

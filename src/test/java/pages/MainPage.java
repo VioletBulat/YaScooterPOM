@@ -12,8 +12,8 @@ public class MainPage {
     }
 
     // Локаторы для элементов на главной странице
-    private final By cookieBannerCloseButton = By.xpath("//button[text()='да все привыкли']");  // Добавим локатор для кнопки закрытия баннера
-    private final By orderButton = By.xpath("//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
+    private final By cookieBannerCloseButton = By.xpath(Config.getLocator("cookieBannerCloseButton"));  // Кнопка закрытия баннера
+    private final By orderButton = By.xpath(Config.getLocator("orderButton"));  // Кнопка оформления заказа
 
     // Метод для закрытия баннера с куки
     public void closeCookieBanner() {
