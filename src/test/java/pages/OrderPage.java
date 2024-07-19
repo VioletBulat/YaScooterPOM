@@ -1,117 +1,90 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class OrderPage {
-    private final WebDriverWait wait;
-
-    // Инициализация WebDriverWait
-    public OrderPage(WebDriver driver) {
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
 
     // Локаторы
-    private final By nameInput = By.xpath(Config.getLocator("nameInput"));
-    private final By surnameInput = By.xpath(Config.getLocator("surnameInput"));
-    private final By addressInput = By.xpath(Config.getLocator("addressInput"));
-    private final By metroStationInput = By.xpath(Config.getLocator("metroStationInput"));
-    private final By phoneInput = By.xpath(Config.getLocator("phoneInput"));
-    private final By dateInput = By.xpath(Config.getLocator("dateInput"));
-    private final By rentalPeriodDropdown = By.xpath(Config.getLocator("rentalPeriodDropdown"));
-    private final By commentInput = By.xpath(Config.getLocator("commentInput"));
-    private final By makeOrderButton = By.xpath(Config.getLocator("makeOrderButton"));
-    private final By yesButton = By.xpath(Config.getLocator("yesButton"));
-    private final By orderSuccessMessage = By.xpath(Config.getLocator("orderSuccessMessage"));
+    private final SelenideElement nameInput = $x(Config.getLocator("nameInput"));
+    private final SelenideElement surnameInput = $x(Config.getLocator("surnameInput"));
+    private final SelenideElement addressInput = $x(Config.getLocator("addressInput"));
+    private final SelenideElement metroStationInput = $x(Config.getLocator("metroStationInput"));
+    private final SelenideElement phoneInput = $x(Config.getLocator("phoneInput"));
+    private final SelenideElement nextButton = $x(Config.getLocator("nextButton"));
+    private final SelenideElement dateInput = $x(Config.getLocator("dateInput"));
+    private final SelenideElement rentalPeriodDropdown = $x(Config.getLocator("rentalPeriodDropdown"));
+    private final SelenideElement commentInput = $x(Config.getLocator("commentInput"));
+    private final SelenideElement makeOrderButton = $x(Config.getLocator("makeOrderButton"));
+    private final SelenideElement yesButton = $x(Config.getLocator("yesButton"));
+    private final SelenideElement orderSuccessMessage = $x(Config.getLocator("orderSuccessMessage"));
 
     // Метод для заполнения поля имени
     public void fillName(String name) {
-        WebElement nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(nameInput));
-        nameField.sendKeys(name);
+        nameInput.setValue(name);
     }
 
     // Метод для заполнения поля фамилии
     public void fillSurname(String surname) {
-        WebElement surnameField = wait.until(ExpectedConditions.visibilityOfElementLocated(surnameInput));
-        surnameField.sendKeys(surname);
+        surnameInput.setValue(surname);
     }
 
     // Метод для заполнения поля адреса
     public void fillAddress(String address) {
-        WebElement addressField = wait.until(ExpectedConditions.visibilityOfElementLocated(addressInput));
-        addressField.sendKeys(address);
+        addressInput.setValue(address);
     }
 
     // Метод для выбора станции метро
-    public void selectMetroStation() {
-        WebElement stationInput = wait.until(ExpectedConditions.elementToBeClickable(metroStationInput));
-        stationInput.click();
-        stationInput.sendKeys(Keys.ARROW_DOWN);
-        stationInput.sendKeys(Keys.ENTER);
+    public void selectMetroStation(String station) {
+        metroStationInput.click();
+        $x("//div[contains(text(),'" + station + "')]").click();
     }
 
     // Метод для заполнения поля телефона
     public void fillPhone(String phone) {
-        WebElement phoneField = wait.until(ExpectedConditions.visibilityOfElementLocated(phoneInput));
-        phoneField.sendKeys(phone);
+        phoneInput.setValue(phone);
+    }
 
-        // Нажатие кнопки "Далее" после ввода номера телефона
-        WebElement nextButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Далее']")));
+    // Клик по кнопке "Далее"
+    public void nextButton() {
         nextButton.click();
     }
 
     // Метод для выбора даты доставки
     public void selectDate(String date) {
-        WebElement dateElement = wait.until(ExpectedConditions.elementToBeClickable(dateInput));
-        dateElement.click();
-        dateElement.sendKeys(date);
-        dateElement.sendKeys(Keys.ENTER);
+        dateInput.click();
+        $x("//div[contains(text(),'" + date + "')]").click();
     }
 
     // Метод для выбора срока аренды
     public void selectRentalPeriod(String period) {
-        WebElement rentalDropdown = wait.until(ExpectedConditions.elementToBeClickable(rentalPeriodDropdown));
-        rentalDropdown.click();
-        WebElement periodOption = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='Dropdown-option' and contains(text(), '" + period + "')]")));
-        periodOption.click();
+        rentalPeriodDropdown.click();
+        $x("//div[contains(@class, 'Dropdown-option') and text()='" + period + "']").click();
     }
 
     // Метод для выбора цвета самоката
     public void selectColor(String color) {
-        WebElement colorOption = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[@for='" + color + "']")));
-        colorOption.click();
+        $x("//label[@for='" + color + "']").click();
     }
 
     // Метод для заполнения поля комментария
     public void fillComment(String comment) {
-        WebElement commentField = wait.until(ExpectedConditions.visibilityOfElementLocated(commentInput));
-        commentField.sendKeys(comment);
+        commentInput.setValue(comment);
     }
-
 
     // Метод для клика по кнопке "Заказать"
     public void clickMakeOrderButton() {
-        WebElement makeOrderBtn = wait.until(ExpectedConditions.elementToBeClickable(makeOrderButton));
-        makeOrderBtn.click();
+        makeOrderButton.click();
     }
 
     // Метод для клика по кнопке "Да"
     public void clickYesButton() {
-        WebElement yesBtn = wait.until(ExpectedConditions.elementToBeClickable(yesButton));
-        yesBtn.click();
+        yesButton.click();
     }
 
     // Метод для проверки наличия сообщения об успешном заказе
     public void assertOrderSuccess() {
-        WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(orderSuccessMessage));
-        if (successMessage == null) {
-            throw new AssertionError("Элемент с текстом 'Заказ оформлен' не найден");
-        }
+        orderSuccessMessage.should(Condition.visible);
     }
 }
